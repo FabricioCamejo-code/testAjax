@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <header>
+          <h1>Tienda</h1>
+        </header>
+  
+        <main id="view"></main>
+      </div>
+  
+      <!--Libs-->
+      <script src="handlebars.min.js"></script>
+  
+      <script src="script.js"></script>
+
+      <script>
+        let autosList = [{
+            nombre: "Auto1 - 2024",
+            descripcion:
+              "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+            precio: "1",
+            urlImagen: "https://es.automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2025/CR-V/Color-Selector-360/Urban-Gray-Pearl/CRV25-235_SPORT_TOURING_NH_912P_Urban_Gray_Pearl.png",
+            id: "1",
+        },
+        {
+            nombre: "Auto2 - 2024",
+            descripcion:
+              "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+            precio: "2",
+            urlImagen: "https://es.automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2025/CR-V/Color-Selector-360/Urban-Gray-Pearl/CRV25-235_SPORT_TOURING_NH_912P_Urban_Gray_Pearl.png",
+            id: "2",
+        },
+        {
+            nombre: "Auto3 - 2024",
+            descripcion:
+              "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+            precio: "3",
+            urlImagen: "https://es.automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2025/CR-V/Color-Selector-360/Urban-Gray-Pearl/CRV25-235_SPORT_TOURING_NH_912P_Urban_Gray_Pearl.png",
+            id: "3",
+        },
+        {
+            nombre: "Auto4 - 2024",
+            descripcion:
+              "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+            precio: "4",
+            urlImagen: "https://es.automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2025/CR-V/Color-Selector-360/Urban-Gray-Pearl/CRV25-235_SPORT_TOURING_NH_912P_Urban_Gray_Pearl.png",
+            id: "4",
+        },
+        {
+            nombre: "Auto5 - 2024",
+            descripcion:
+              "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+            precio: "5",
+            urlImagen: "https://es.automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2025/CR-V/Color-Selector-360/Urban-Gray-Pearl/CRV25-235_SPORT_TOURING_NH_912P_Urban_Gray_Pearl.png",
+            id: "5",
+        },
+        {
+            nombre: "Auto6 - 2024",
+            descripcion:
+              "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+            precio: "6",
+            urlImagen: "https://es.automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2025/CR-V/Color-Selector-360/Urban-Gray-Pearl/CRV25-235_SPORT_TOURING_NH_912P_Urban_Gray_Pearl.png",
+            id: "6",
+        },
+        {
+            nombre: "Auto7 - 2024",
+            descripcion:
+              "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+            precio: "7",
+            urlImagen: "https://es.automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2025/CR-V/Color-Selector-360/Urban-Gray-Pearl/CRV25-235_SPORT_TOURING_NH_912P_Urban_Gray_Pearl.png",
+            id: "7",
+        },
+        {
+            nombre: "Auto8 - 2024",
+            descripcion:
+              "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+            precio: "8",
+            urlImagen: "https://es.automobiles.honda.com/-/media/Honda-Automobiles/Vehicles/2025/CR-V/Color-Selector-360/Urban-Gray-Pearl/CRV25-235_SPORT_TOURING_NH_912P_Urban_Gray_Pearl.png",
+            id: "8",
+        },
+    ];
+
+        function HomePage(){
+            renderPage('index.hbs', { autosList, }, () => {
+                document.getElementById('orderBy').addEventListener('change', (e) => {
+                    switch(e.target.value) {
+                        case 'mayorPrecio':
+                            autosList = autosList.sort((a,b) => 
+                            Number(a.precio) < Number(b.precio) ? 1 : -1
+                            )
+                            break;
+                        case 'menorPrecio':
+                            autosList = autosList.sort((a,b) =>
+                            Number(a.precio) > Number(b.precio) ? 1 : -1
+                            )
+                            break;
+                    }
+                    document.getElementById("view").innerHTML = HomePage({
+                        autosList,
+                    });
+                });
+                document.getElementById('search-form').addEventListener('change', (e) => {
+                    autosList = autosList.filter((item) => item.nombre.toLowerCase().includes(params.get('q').toLowerCase()))
+                    document.getElementById("view").innerHTML = HomePage({
+                        autosList,
+                    });
+                })
+            })
+        }
+
+        HomePage();
+
+
+        </script>
+</body>
+</html>
